@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-Bit CSS Icon Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <h1>🎮 8-Bit CSS Icon Builder</h1>
+        </header>
+        
+        <!-- Main Layout -->
+        <main class="main-layout">
+            <!-- Linke Seite: Farbpalette -->
+            <aside class="sidebar-left">
+                <h2>Farben</h2>
+                <div class="color-palette" id="colorPalette"></div>
+                <div class="current-color">
+                    <span>Aktiv:</span>
+                    <div class="color-preview" id="currentColorPreview"></div>
+                </div>
+            </aside>
+            
+            <!-- Mitte: Editor Grid -->
+            <section class="editor-center">
+                <!-- Toolbar oben fixiert -->
+                <div class="toolbar">
+                    <button id="toolPen" class="toolbar-btn active" title="Stift">✏️</button>
+                    <button id="toolLine" class="toolbar-btn" title="Linie">📏</button>
+                    <button id="toolRect" class="toolbar-btn" title="Rechteck">⬜</button>
+                    <button id="toolCircle" class="toolbar-btn" title="Kreis">⭕</button>
+                </div>
+                <!-- Grid-Wrapper für Zentrierung -->
+                <div class="grid-wrapper">
+                    <div class="pixel-grid" id="pixelGrid"></div>
+                    <div class="editor-controls">
+                        <button id="clearBtn" class="tool-btn">🗑️ Löschen</button>
+                        <button id="fillBtn" class="tool-btn">🪣 Füllen</button>
+                        <button id="size8Btn" class="tool-btn size-btn">8x8</button>
+                        <button id="size16Btn" class="tool-btn size-btn active">16x16</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Rechte Seite: Vorschau -->
+            <aside class="sidebar-right">
+                <h2>Vorschau</h2>
+                <div class="preview-container">
+                    <div class="preview-item">
+                        <span>1x (16px)</span>
+                        <div class="preview-box">
+                            <div class="icon-preview" id="preview1x"></div>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <span>2x (32px)</span>
+                        <div class="preview-box medium">
+                            <div class="icon-preview scale-2x" id="preview2x"></div>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <span>4x (64px)</span>
+                        <div class="preview-box large">
+                            <div class="icon-preview scale-4x" id="preview4x"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="export-section">
+                    <div class="class-name-input">
+                        <label for="className">Klasse:</label>
+                        <input type="text" id="className" value="my-icon" placeholder="icon-name">
+                    </div>
+                    <button id="generateBtn" class="generate-btn">📋 CSS Preview</button>
+                    <button id="importBtn" class="generate-btn" style="background:#3c44a4;box-shadow:inset -4px -4px 0 0 #1a1a4a,inset 4px 4px 0 0 #6070d0,0 4px 0 0 #1a1a2e;margin-top:8px;">📥 CSS Import</button>
+                </div>
+            </aside>
+        </main>
+    </div>
+    
+    <!-- Import Modal -->
+    <div class="modal" id="importModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>CSS Import</h2>
+                <button class="close-btn" id="closeImportModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:9px;margin-bottom:10px;color:#9d9d9d;">Füge CSS mit box-shadow Pixel-Art ein:</p>
+                <textarea id="importTextarea" style="width:100%;height:300px;background:#1a1a2e;border:2px solid #4ecdc4;color:#4ecdc4;font-family:monospace;font-size:11px;padding:10px;resize:none;" placeholder="/* Füge hier deinen CSS Code ein... */"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="doImportBtn" class="copy-btn">📥 Importieren</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CSS Modal -->
+    <div class="modal" id="cssModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Generierter CSS Code</h2>
+                <button class="close-btn" id="closeModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <pre><code id="cssOutput"></code></pre>
+            </div>
+            <div class="modal-footer">
+                <button id="copyBtn" class="copy-btn">📋 Kopieren</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
